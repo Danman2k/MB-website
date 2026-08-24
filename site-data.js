@@ -16,7 +16,7 @@ window.siteData = {
     { label: "Spotify", url: "https://open.spotify.com/artist/6JomyCkbjLn0PDQMn0ZJCN", icon: "fa-brands fa-spotify" },
     { label: "Instagram", url: "https://www.instagram.com/mindfullyblind/", icon: "fa-brands fa-instagram" },
     { label: "TikTok", url: "https://www.tiktok.com/@mindfullyblind", icon: "fa-brands fa-tiktok" },
-    { label: "YouTube", url: "https://www.youtube.com/channel/UCELA5rLsbAwoI4j1Gbaps4w", icon: "fa-brands fa-youtube" },
+    { label: "YouTube", url: "https://youtube.com/@mindfullyblind?si=9b5Vzz4gGh1SzYiS", icon: "fa-brands fa-youtube" },
   ],
   upcomingShows: [
     {
