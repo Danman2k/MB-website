@@ -20,12 +20,21 @@ window.siteData = {
   ],
   upcomingShows: [
     {
-      date: "6/23/25",
-      label: "Cafe Mustache, Chicago, IL",
-      ticketUrl: "https://www.ticketmaster.com/",
+      date: "8/29/26",
+      label: "Bridge's Scoreboard, Griffith, IN",
+      ticketUrl: "https://www.facebook.com/mindfullyblind/posts/were-goin-back-to-indiana%EF%B8%8Fthis-is-not-a-drill-we-will-be-playing-at-bridges-scor/1741458150865081/",
     },
+     { date: "10/7/26", 
+     label: "Hoosier Dome, Indianapolis, IN",
+     ticketUrl: "https://wl.eventim.us/event/Greywind/695255?afflky=HoosierDome", },
   ],
   pastShowsByYear: [
+    {
+      year: 2026,
+      shows: [
+        { date: "7/12/26", label: "Burlington Bar, Chicago, IL" },
+      ],
+    },
     {
       year: 2025,
       shows: [

@@ -358,6 +358,10 @@ h1 {
   font-size: clamp(0.98rem, 2.2vw, 1.08rem);
 }
 
+.about-hero-photo {
+  display: none;
+}
+
 .about-members {
   width: 100%;
   margin: 0;
@@ -771,19 +775,45 @@ h1 {
   }
 
   .about-hero {
-    min-height: clamp(28rem, 78svh, 36rem);
-    padding: 1.5rem 1rem 0;
-    background-position: center top;
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    padding: 0;
+    background-image: none;
+  }
+
+  .about-hero::before {
+    display: none;
+  }
+
+  .about-hero-photo {
+    display: block;
+    order: 2;
+    width: 100%;
+    height: auto;
+  }
+
+  .about-hero-content {
+    display: contents;
   }
 
   .about-hero-content h1 {
-    font-size: clamp(1.6rem, 8vw, 2.25rem);
+    order: 1;
+    width: 100%;
+    padding: 1.15rem 1rem 0.85rem;
+    font-size: clamp(1.35rem, 6vw, 1.85rem);
+    text-align: left;
   }
 
   .about-hero .about-intro {
-    margin-top: 1.25rem;
-    margin-bottom: 1.75rem;
-    font-size: 0.95rem;
+    order: 3;
+    width: 100%;
+    margin: 0;
+    padding: 0 1rem 1.35rem;
+    background: #000;
+    text-shadow: none;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.92rem;
     line-height: 1.6;
   }
 
