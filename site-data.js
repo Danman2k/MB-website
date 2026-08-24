@@ -17,7 +17,6 @@ window.siteData = {
     { label: "Instagram", url: "https://www.instagram.com/mindfullyblind/", icon: "fa-brands fa-instagram" },
     { label: "TikTok", url: "https://www.tiktok.com/@mindfullyblind", icon: "fa-brands fa-tiktok" },
     { label: "YouTube", url: "https://youtube.com/", icon: "fa-brands fa-youtube" },
-    { label: "Substack", url: "https://substack.com/", svg: "substack" },
   ],
   upcomingShows: [
     {
