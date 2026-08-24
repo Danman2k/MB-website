@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Videos | Mindfully Blind</title>
+    <meta name="description" content="Mindfully Blind music videos." />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page-body">
+    <header class="site-nav">
+      <div class="nav-left">
+        <a class="brand" href="./index.html">Mindfully Blind</a>
+        <div id="nav-social-links" class="nav-social-links" aria-label="Social links"></div>
+      </div>
+      <nav class="nav-menu">
+        <a href="./about.html">About</a>
+        <a href="./shows.html">Shows</a>
+        <a class="active" href="./videos.html">Videos</a>
+        <a href="./music.html">Music</a>
+        <!-- <a href="./join.html">Join</a> -->
+        <a href="./contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page-wrap">
+      <section class="page-header">
+        <h1>Videos</h1>
+        <p>Check out our award-winning music video “Distraction,” recipient of the Best Music Video award at the 2025 Indiana Youth Film Festival and nominee at the 2025 Victory International Film Festival and 2025 DaVinci Film Festival.</p>
+      </section>
+      <section class="video-frame-wrap" id="video-player">
+        <iframe
+          id="featured-video"
+          title="Mindfully Blind latest music video"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+        <a
+          id="video-fallback"
+          class="video-fallback"
+          href="https://www.youtube.com/watch?v=_UXic_wuCb4"
+          target="_blank"
+          rel="noopener noreferrer"
+          hidden
+        >
+          <img src="" alt="" />
+          <span class="video-fallback-play" aria-hidden="true"
+            ><i class="fa-solid fa-play"></i
+          ></span>
+          <span class="video-fallback-label">Watch on YouTube</span>
+        </a>
+      </section>
+      <!-- This is a comment. The browser will ignore it. <p id="video-local-hint" class="video-local-hint" hidden>
+        Chrome can’t play embedded YouTube from a saved file. In this folder run
+        <code>npm run preview</code> (or use the Live Server extension), then open
+        <code>http://localhost:4173/videos.html</code>. -->
+      </p>
+    </main>
+
+    <script src="./site-data.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

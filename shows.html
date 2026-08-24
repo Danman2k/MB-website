@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shows | Mindfully Blind</title>
+    <meta name="description" content="Mindfully Blind show gallery." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page-body">
+    <header class="site-nav">
+      <div class="nav-left">
+        <a class="brand" href="./index.html">Mindfully Blind</a>
+        <div id="nav-social-links" class="nav-social-links" aria-label="Social links"></div>
+      </div>
+      <nav class="nav-menu">
+        <a href="./about.html">About</a>
+        <a class="active" href="./shows.html">Shows</a>
+        <a href="./videos.html">Videos</a>
+        <a href="./music.html">Music</a>
+        <!-- <a href="./join.html">Join</a> -->
+        <a href="./contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page-wrap">
+      <section class="page-header">
+        <h1>Shows</h1>
+        <p>Upcoming dates and a history of where we’ve played.</p>
+      </section>
+
+      <section
+        id="upcoming-shows-section"
+        class="shows-section shows-list-block"
+        aria-labelledby="upcoming-shows-heading"
+        hidden
+      >
+        <h2 id="upcoming-shows-heading" class="shows-section-title">Upcoming</h2>
+        <ul id="upcoming-shows-list" class="shows-list"></ul>
+      </section>
+      <p id="upcoming-shows-empty" class="shows-empty shows-list-block">
+        No upcoming shows right now. Check back soon.
+      </p>
+
+      <section
+        class="shows-section shows-list-block"
+        aria-labelledby="past-shows-heading"
+      >
+        <h2 id="past-shows-heading" class="shows-section-title">Previous Shows</h2>
+        <div id="past-shows-list" class="past-shows-list"></div>
+      </section>
+    </main>
+
+    <script src="./site-data.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
