@@ -28,6 +28,7 @@ body {
 
 body {
   padding-top: var(--nav-height, 4.5rem);
+  overflow-x: hidden;
 }
 
 .site-nav {
@@ -163,13 +164,20 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  text-align: center;
 }
 
 .hero h1 {
   position: relative;
   z-index: 1;
   max-width: min(840px, 100%);
+  margin-inline: auto;
+  text-align: center;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 12px rgba(0, 0, 0, 0.75);
+}
+
+.hero-photo {
+  display: none;
 }
 
 h1 {
@@ -304,10 +312,23 @@ h1 {
   padding: 2.5rem 1.25rem 0;
   background-image: url("./about-photo.png");
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   position: relative;
   text-align: center;
+}
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.15) 45%,
+    rgba(0, 0, 0, 0.72) 100%
+  );
+  pointer-events: none;
 }
 
 .about-hero-content {
@@ -692,10 +713,87 @@ h1 {
   color: #ffb4b4;
 }
 
+@media (max-width: 1024px) {
+  .hero {
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
 @media (max-width: 760px) {
+  html {
+    scroll-snap-type: none;
+  }
+
+  .site-section-snap {
+    min-height: auto;
+  }
+
+  #home.site-section-snap {
+    min-height: auto;
+  }
+
+  #home .hero {
+    flex: 0 0 auto;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: auto;
+    padding: 0.75rem 1rem 0.5rem;
+    background-image: none;
+  }
+
+  .hero h1 {
+    order: 1;
+    margin: 0 0 0.85rem;
+    width: 100%;
+    text-shadow: none;
+    font-size: clamp(1.35rem, 7vw, 2.15rem);
+    line-height: 1.15;
+  }
+
+  .hero-photo {
+    display: block;
+    order: 2;
+    width: min(82vw, 26rem);
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .home-bottom-links {
+    margin: 0.5rem auto 1.25rem;
+    padding: 0.45rem 0.85rem;
+    max-width: calc(100% - 1.5rem);
+  }
+
+  .about-hero {
+    min-height: clamp(28rem, 78svh, 36rem);
+    padding: 1.5rem 1rem 0;
+    background-position: center top;
+  }
+
+  .about-hero-content h1 {
+    font-size: clamp(1.6rem, 8vw, 2.25rem);
+  }
+
+  .about-hero .about-intro {
+    margin-top: 1.25rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
   .about-member-row,
   .about-member-row--reverse {
     grid-template-columns: 1fr;
+  }
+
+  .about-member-row .about-member-photo {
+    order: -1;
   }
 
   .about-member-row--reverse .about-member-copy,
@@ -704,20 +802,81 @@ h1 {
     grid-row: auto;
   }
 
+  .about-member-copy {
+    padding: 1.15rem 1rem 1.35rem;
+  }
+
+  .about-member-copy h2 {
+    font-size: clamp(1.35rem, 6vw, 1.85rem);
+  }
+
+  .about-member-copy p {
+    font-size: 0.92rem;
+  }
+
   .about-member-photo {
-    min-height: 12rem;
-    aspect-ratio: 16 / 10;
-    border-top: none;
+    min-height: unset;
+    max-height: none;
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    object-fit: cover;
+    object-position: center top;
   }
 
   .about-member-row + .about-member-row .about-member-photo {
     border-top: none;
   }
 
+  .page-wrap {
+    padding: 1.5rem 1rem 2.25rem;
+  }
+
+  .page-header h1 {
+    font-size: clamp(1.55rem, 8vw, 2.2rem);
+  }
+
+  .page-header p {
+    font-size: 0.95rem;
+  }
+
+  .shows-section {
+    margin-top: 1.35rem;
+  }
+
+  .shows-list-item {
+    align-items: flex-start;
+  }
+
+  .shows-ticket-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 17.5rem;
+    margin-inline: auto;
+  }
+
+  .music-about {
+    margin-top: 1.75rem;
+    text-align: left;
+  }
+
+  .music-about p {
+    font-size: 0.95rem;
+  }
+
+  .brand {
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+  }
+
   .site-nav {
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 0.75rem 1rem;
   }
 
   .nav-left {
