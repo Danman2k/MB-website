@@ -6,7 +6,7 @@
     <title>Mindfully Blind</title>
     <meta
       name="description"
-      content="Mindfully Blind official links."
+      content="Mindfully Blind — official site for shows, music, and contact."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,28 +20,190 @@
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="page-body">
     <header class="site-nav">
       <div class="nav-left">
-        <a class="brand" href="./index.html">Mindfully Blind</a>
+        <a class="brand" href="#home">Mindfully Blind</a>
         <div id="nav-social-links" class="nav-social-links" aria-label="Social links"></div>
       </div>
       <nav class="nav-menu">
-        <a href="./about.html">About</a>
-        <a href="./shows.html">Shows</a>
-        <!-- <a href="./videos.html">Videos</a> -->
-        <a href="./music.html">Music</a>
-        <!-- <a href="./join.html">Join</a> -->
-        <a href="./contact.html">Contact</a>
+        <a href="#about" data-section="about">About</a>
+        <a href="#shows" data-section="shows">Shows</a>
+        <!-- <a href="#videos">Videos</a> -->
+        <a href="#music" data-section="music">Music</a>
+        <!-- <a href="#join">Join</a> -->
+        <a href="#contact" data-section="contact">Contact</a>
       </nav>
     </header>
 
-    <main class="home">
-      <section class="hero" aria-label="Mindfully Blind band photo">
-        <h1>Welcome to the family</h1>
+    <main class="site-main">
+      <section id="home" class="site-section site-section-snap" aria-label="Home">
+        <div class="hero" aria-label="Mindfully Blind band photo">
+          <h1>Welcome to the family</h1>
+        </div>
+        <div id="link-buttons" class="link-buttons home-bottom-links" aria-label="Social links"></div>
+      </section>
+
+      <section id="about" class="site-section site-section-snap about-page" aria-label="About">
+        <div class="about-hero" aria-label="About Mindfully Blind">
+          <div class="about-hero-content">
+            <h1>About</h1>
+            <p class="about-intro">
+              Mindfully Blind is the natural result of what happens when relationships drive
+              artistry. Made up of three siblings, an in-law, and a childhood best friend, our
+              love for each other and our craft is reflected in the quality of our music and
+              performances. As we grow on our journey, we invite you to come on in; whether
+              you’ve been wandering for a while or been here before, make yourself at home.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-members">
+          <div class="about-members-list">
+            <article class="about-member-row">
+              <div class="about-member-copy">
+                <h2>Antonio</h2>
+                <p>
+                  Antonio is our lead vocalist, rhythm guitarist, and collective little brother
+                  (and quite literally Kristofer and Olivia’s youngest brother). As frontman of
+                  the band, you can count on him to create a fan experience that draws you in
+                  and keeps you in until the very last chord.
+                </p>
+              </div>
+              <img
+                class="about-member-photo"
+                src="./antonio.png"
+                alt="Antonio, lead vocalist and rhythm guitarist"
+              />
+            </article>
+
+            <article class="about-member-row about-member-row--reverse">
+              <div class="about-member-copy">
+                <h2>Kristofer</h2>
+                <p>
+                  Kristofer is our bass extraordinaire, backup vocalist, and big brother (Antonio
+                  and Olivia’s literal big brother). At our gigs, you’ll see him stomping around
+                  the stage and headbanging with those luscious locks.
+                </p>
+              </div>
+              <img
+                class="about-member-photo"
+                src="./kristofer.png"
+                alt="Kristofer, bassist and backup vocalist"
+              />
+            </article>
+
+            <article class="about-member-row">
+              <div class="about-member-copy">
+                <h2>Olivia</h2>
+                <p>
+                  Olivia is our synth, backup vocalist, and sister (Antonio and Kristofer’s
+                  literal sister). She brings the vibes with specially curated sounds that
+                  elevate the band’s signature alternative style to the next level.
+                </p>
+              </div>
+              <img
+                class="about-member-photo"
+                src="./olivia.png"
+                alt="Olivia, synth and backup vocalist"
+              />
+            </article>
+
+            <article class="about-member-row about-member-row--reverse">
+              <div class="about-member-copy">
+                <h2>Dan</h2>
+                <p>
+                  Dan is our lead guitarist, audio engineer, and in-law (Olivia’s husband,
+                  Antonio and Kristofer’s brother-in-law). His attention to detail and
+                  analytical ear bring the band’s sounds to life both on stage and in the
+                  studio.
+                </p>
+              </div>
+              <img
+                class="about-member-photo"
+                src="./dan.png"
+                alt="Dan, lead guitarist and audio engineer"
+              />
+            </article>
+
+            <article class="about-member-row">
+              <div class="about-member-copy">
+                <h2>Jackson</h2>
+                <p>
+                  Jackson is our drummer. As a chosen member of the family, he is the keystone
+                  of the band’s energy with his exceptional skill and innate sense of rhythm.
+                  You might need to stretch before and after our gigs; his drumming makes it
+                  nearly impossible not to headbang along with us.
+                </p>
+              </div>
+              <img
+                class="about-member-photo"
+                src="./jackson.png"
+                alt="Jackson, drummer"
+              />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="shows" class="site-section page-wrap" aria-label="Shows">
+        <div class="page-header">
+          <h1>Shows</h1>
+          <p>Upcoming dates and a history of where we’ve played.</p>
+        </div>
+
+        <div
+          id="upcoming-shows-section"
+          class="shows-section shows-list-block"
+          aria-labelledby="upcoming-shows-heading"
+          hidden
+        >
+          <h2 id="upcoming-shows-heading" class="shows-section-title">Upcoming</h2>
+          <ul id="upcoming-shows-list" class="shows-list"></ul>
+        </div>
+        <p id="upcoming-shows-empty" class="shows-empty shows-list-block">
+          No upcoming shows right now. Check back soon.
+        </p>
+
+        <div class="shows-section shows-list-block" aria-labelledby="past-shows-heading">
+          <h2 id="past-shows-heading" class="shows-section-title">Previous Shows</h2>
+          <div id="past-shows-list" class="past-shows-list"></div>
+        </div>
+      </section>
+
+      <section id="music" class="site-section page-wrap page-section-compact" aria-label="Music">
+        <div class="page-header">
+          <h1>Music</h1>
+        </div>
+        <div id="music-grid" class="card-grid"></div>
+
+        <div class="music-about">
+          <p>
+            Our sound is best described as uniquely alternative. Combining aspects of funk,
+            punk, pop, and rock, you’ll find in our discography a rich variety of songs that
+            feels distinctly us and suits any mood. Having complicated feelings over someone
+            you want to be with but probably shouldn’t? Check out “Wreck.” Yearning hard but
+            can’t seem to get their attention? Try “Distraction.” Frustrated at an exploitative
+            system that forces artists into soul-sucking work just to survive? “Dotted Line”
+            has got you covered. No matter who you are or where you come from, Mindfully Blind
+            has a song for you.
+          </p>
+        </div>
+      </section>
+
+      <section id="contact" class="site-section page-wrap page-section-compact" aria-label="Contact">
+        <div class="page-header">
+          <h1>Contact</h1>
+          <p>
+            Booking and press:
+            <a class="text-link" href="mailto:mindfullyblind@gmail.com"
+              >mindfullyblind@gmail.com</a
+            >
+          </p>
+        </div>
+        <div id="contact-links" class="link-buttons"></div>
       </section>
     </main>
-    <div id="link-buttons" class="link-buttons home-bottom-links" aria-label="Social links"></div>
 
     <script src="./site-data.js"></script>
     <script src="./script.js"></script>

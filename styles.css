@@ -10,6 +10,12 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height, 4.5rem);
+  scroll-snap-type: y proximity;
+}
+
 html,
 body {
   margin: 0;
@@ -111,6 +117,38 @@ body {
   min-height: calc(100vh - var(--nav-height, 4.5rem));
   padding: 0;
   text-align: center;
+}
+
+.site-main {
+  display: block;
+}
+
+.site-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+.site-section-snap {
+  min-height: calc(100vh - var(--nav-height, 4.5rem));
+}
+
+#home {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+#home .hero {
+  flex: 1;
+  min-height: 0;
+}
+
+.page-section-compact {
+  padding-bottom: 1.25rem;
+}
+
+#music.page-section-compact .music-about {
+  margin-top: 1.75rem;
 }
 
 .hero {
@@ -215,16 +253,16 @@ h1 {
 }
 
 .home-bottom-links {
-  position: fixed;
-  left: 50%;
-  bottom: 1rem;
-  transform: translateX(-50%);
-  margin-top: 0;
+  position: relative;
+  left: auto;
+  bottom: auto;
+  transform: none;
+  margin: 0 auto 1rem;
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(6px);
-  z-index: 25;
+  z-index: 1;
 }
 
 .page-body {

@@ -365,6 +365,68 @@ function initScrollNav() {
   );
 }
 
+function initSectionNav() {
+  const sections = Array.from(document.querySelectorAll(".site-section[id]"));
+  const navLinks = Array.from(document.querySelectorAll(".nav-menu a[data-section]"));
+  if (!sections.length || !navLinks.length) return;
+
+  const sectionById = new Map(sections.map((section) => [section.id, section]));
+
+  const setActiveSection = (sectionId) => {
+    navLinks.forEach((link) => {
+      link.classList.toggle("active", link.dataset.section === sectionId);
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (!visible.length) return;
+      setActiveSection(visible[0].target.id);
+    },
+    {
+      root: null,
+      rootMargin: "-35% 0px -45% 0px",
+      threshold: [0, 0.15, 0.35, 0.55],
+    }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  const scrollToSection = (sectionId) => {
+    const section = sectionById.get(sectionId);
+    if (!section) return;
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.replaceState(null, "", `#${sectionId}`);
+    setActiveSection(sectionId);
+  };
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const sectionId = link.dataset.section || link.getAttribute("href")?.slice(1);
+      if (!sectionId || !sectionById.has(sectionId)) return;
+      event.preventDefault();
+      scrollToSection(sectionId);
+    });
+  });
+
+  document.querySelector(".brand")?.addEventListener("click", (event) => {
+    if (!sectionById.has("home")) return;
+    event.preventDefault();
+    scrollToSection("home");
+  });
+
+  const initialSection = window.location.hash.replace("#", "");
+  if (initialSection && sectionById.has(initialSection)) {
+    requestAnimationFrame(() => scrollToSection(initialSection));
+  } else {
+    setActiveSection("home");
+  }
+}
+
 renderLinks();
 renderNavLinks();
 renderContactLinks();
@@ -374,3 +436,4 @@ renderFeaturedVideo();
 initMailingListForm();
 initMobileNav();
 initScrollNav();
+initSectionNav();
