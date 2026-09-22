@@ -319,6 +319,7 @@ h1 {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.45) 0%,
@@ -328,9 +329,19 @@ h1 {
   pointer-events: none;
 }
 
+.about-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
 .about-hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -356,13 +367,11 @@ h1 {
 }
 
 .about-hero-photo {
-  position: absolute;
-  inset: 0;
   display: block;
-  width: 100%;
+  width: auto;
   height: 100%;
-  object-fit: contain;
-  object-position: center top;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .about-members {
@@ -728,6 +737,11 @@ h1 {
 }
 
 @media (min-width: 761px) {
+  .about-hero {
+    height: calc(100vh - var(--nav-height, 4.5rem));
+    min-height: calc(100vh - var(--nav-height, 4.5rem));
+  }
+
   .about-hero-content {
     max-width: min(980px, 100%);
     margin-inline: auto;
@@ -803,13 +817,18 @@ h1 {
     display: none;
   }
 
-  .about-hero-photo {
+  .about-hero-media {
     position: static;
+    display: contents;
+  }
+
+  .about-hero-photo {
     display: block;
     order: 2;
     width: 100%;
     height: auto;
-    object-fit: unset;
+    max-width: none;
+    max-height: none;
   }
 
   .about-hero-content {
