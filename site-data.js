@@ -20,13 +20,19 @@ window.siteData = {
   ],
   upcomingShows: [
     {
-      date: "9/25/26",
-      label: "Underground Lounge, Chicago, IL",
-      ticketUrl: "",
+      date: "10/7/26",
+      label: "Hoosier Dome, Indianapolis, IN",
+      ticketUrl: "https://wl.eventim.us/event/Greywind/695255?afflky=HoosierDome",
     },
      
   ],
   pastShowsByYear: [
+
+    {
+      date: "9/25/26",
+      label: "Underground Lounge, Chicago, IL",
+      ticketUrl: "",
+    },
     {
       year: 2026,
       shows: [

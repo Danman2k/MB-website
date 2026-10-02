@@ -260,6 +260,47 @@ h1 {
   opacity: 0.82;
 }
 
+#contact .link-buttons {
+  margin-top: 1.75rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+  max-width: 14rem;
+}
+
+#contact .link-button {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  padding: 0.75rem 0;
+  justify-content: flex-start;
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#contact .link-button:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#contact .link-button i {
+  width: 1.15rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+#contact .link-button:hover {
+  background: transparent;
+  color: #fff;
+  padding-left: 0.25rem;
+}
+
 .home-bottom-links {
   position: relative;
   left: auto;
@@ -309,7 +350,7 @@ h1 {
   justify-content: center;
   min-height: calc(100vh - var(--nav-height, 4.5rem));
   width: 100%;
-  padding: 2.5rem 1.25rem 0;
+  padding: 0;
   position: relative;
   text-align: center;
   overflow: hidden;
@@ -345,6 +386,8 @@ h1 {
   flex: 1;
   width: 100%;
   max-width: min(980px, 100%);
+  padding: 2.5rem 1.25rem 0;
+  margin-inline: auto;
 }
 
 .about-hero-content h1 {
@@ -365,11 +408,7 @@ h1 {
 }
 
 .about-hero-photo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 42%;
+  display: none;
 }
 
 .about-members {
@@ -740,9 +779,12 @@ h1 {
     min-height: calc(100vh - var(--nav-height, 4.5rem));
   }
 
-  .about-hero-content {
-    max-width: min(980px, 100%);
-    margin-inline: auto;
+  .about-hero-media {
+    background-image: url("./about-photo.png");
+    background-size: cover;
+    background-position: center 42%;
+    background-repeat: no-repeat;
+    background-color: #000;
   }
 }
 
@@ -818,6 +860,7 @@ h1 {
   .about-hero-media {
     position: static;
     display: contents;
+    background-image: none;
   }
 
   .about-hero-photo {
@@ -825,14 +868,15 @@ h1 {
     order: 2;
     width: 100%;
     height: auto;
-    max-width: none;
-    max-height: none;
-    object-fit: unset;
-    object-position: center top;
   }
 
   .about-hero-content {
     display: contents;
+  }
+
+  .about-hero-content h1,
+  .about-hero .about-intro {
+    padding-inline: 1rem;
   }
 
   .about-hero-content h1 {
