@@ -3,11 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mindfully Blind</title>
+    <title>Mindfully Blind | Alternative Music, Shows &amp; Contact</title>
     <meta
       name="description"
-      content="Mindfully Blind — official site for shows, music, and contact."
+      content="Mindfully Blind is an alternative band blending funk, punk, pop, and rock. Listen to the music, see where they’re playing, and get in touch."
     />
+    <link rel="canonical" href="https://mindfullyblind.com/" />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mindfully Blind" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://mindfullyblind.com/" />
+    <meta property="og:title" content="Mindfully Blind | Alternative Music, Shows &amp; Contact" />
+    <meta
+      property="og:description"
+      content="Mindfully Blind is an alternative band blending funk, punk, pop, and rock. Listen to the music, see where they’re playing, and get in touch."
+    />
+    <meta property="og:image" content="https://mindfullyblind.com/background.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="934" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:alt" content="Mindfully Blind band photo" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mindfully Blind | Alternative Music, Shows &amp; Contact" />
+    <meta
+      name="twitter:description"
+      content="Mindfully Blind is an alternative band blending funk, punk, pop, and rock. Listen to the music, see where they’re playing, and get in touch."
+    />
+    <meta name="twitter:image" content="https://mindfullyblind.com/background.png" />
+    <meta name="twitter:image:alt" content="Mindfully Blind band photo" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "MusicGroup",
+            "@id": "https://mindfullyblind.com/#band",
+            "name": "Mindfully Blind",
+            "url": "https://mindfullyblind.com/",
+            "email": "booking@mindfullyblind.com",
+            "description": "Mindfully Blind is an alternative band blending funk, punk, pop, and rock.",
+            "genre": ["Alternative", "Funk", "Punk", "Pop", "Rock"],
+            "image": "https://mindfullyblind.com/background.png",
+            "sameAs": [
+              "https://open.spotify.com/artist/6JomyCkbjLn0PDQMn0ZJCN",
+              "https://www.instagram.com/mindfullyblind/",
+              "https://www.tiktok.com/@mindfullyblind",
+              "https://www.youtube.com/@mindfullyblind",
+              "https://mindfullyblind.bandcamp.com/"
+            ],
+            "member": [
+              {
+                "@type": "OrganizationRole",
+                "roleName": "Lead vocalist and rhythm guitarist",
+                "member": { "@type": "Person", "name": "Antonio" }
+              },
+              {
+                "@type": "OrganizationRole",
+                "roleName": "Bass and backup vocals",
+                "member": { "@type": "Person", "name": "Kristofer" }
+              },
+              {
+                "@type": "OrganizationRole",
+                "roleName": "Synth and backup vocals",
+                "member": { "@type": "Person", "name": "Olivia" }
+              },
+              {
+                "@type": "OrganizationRole",
+                "roleName": "Lead guitar and audio engineering",
+                "member": { "@type": "Person", "name": "Dan" }
+              },
+              {
+                "@type": "OrganizationRole",
+                "roleName": "Drums",
+                "member": { "@type": "Person", "name": "Jackson" }
+              }
+            ],
+            "album": [
+              {
+                "@type": "MusicAlbum",
+                "name": "The Wanderer",
+                "url": "https://open.spotify.com/album/28gjbH2mmcgsTyNLAm7ar2",
+                "byArtist": { "@id": "https://mindfullyblind.com/#band" }
+              },
+              {
+                "@type": "MusicAlbum",
+                "name": "Waste Your Time, Beg For More",
+                "url": "https://open.spotify.com/album/037NQyJRcHNCdKs6jjImnf",
+                "byArtist": { "@id": "https://mindfullyblind.com/#band" }
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://mindfullyblind.com/#website",
+            "url": "https://mindfullyblind.com/",
+            "name": "Mindfully Blind",
+            "publisher": { "@id": "https://mindfullyblind.com/#band" }
+          }
+        ]
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +122,7 @@
         <a class="brand" href="#home">Mindfully Blind</a>
         <div id="nav-social-links" class="nav-social-links" aria-label="Social links"></div>
       </div>
-      <nav class="nav-menu">
+      <nav class="nav-menu" aria-label="Primary">
         <a href="#about" data-section="about">About</a>
         <a href="#shows" data-section="shows">Shows</a>
         <!-- <a href="#videos">Videos</a> -->
@@ -45,6 +141,8 @@
             class="hero-photo"
             src="./background.png"
             alt="Mindfully Blind band photo"
+            width="934"
+            height="1024"
           />
         </div>
         <div id="link-buttons" class="link-buttons home-bottom-links" aria-label="Social links"></div>
@@ -52,16 +150,18 @@
 
       <section id="about" class="site-section site-section-snap about-page" aria-label="About">
         <div class="about-hero" aria-label="About Mindfully Blind">
-          <div class="about-hero-media" aria-hidden="true">
+          <div class="about-hero-media">
             <img
               class="about-hero-photo"
               src="./about-photo.png"
-              alt=""
+              alt="Mindfully Blind"
+              width="812"
+              height="1024"
             />
           </div>
 
           <div class="about-hero-content">
-            <h1>About</h1>
+            <h2>About</h2>
             <p class="about-intro">
               Mindfully Blind is the natural result of what happens when relationships drive
               artistry. Made up of three siblings, an in-law, and a childhood best friend, our
@@ -76,7 +176,7 @@
           <div class="about-members-list">
             <article class="about-member-row">
               <div class="about-member-copy">
-                <h2>Antonio</h2>
+                <h3>Antonio</h3>
                 <p>
                   Antonio is our lead vocalist, rhythm guitarist, and collective little brother
                   (and quite literally Kristofer and Olivia’s youngest brother). As frontman of
@@ -93,7 +193,7 @@
 
             <article class="about-member-row about-member-row--reverse">
               <div class="about-member-copy">
-                <h2>Kristofer</h2>
+                <h3>Kristofer</h3>
                 <p>
                   Kristofer is our bass extraordinaire, backup vocalist, and big brother (Antonio
                   and Olivia’s literal big brother). At our gigs, you’ll see him stomping around
@@ -109,7 +209,7 @@
 
             <article class="about-member-row">
               <div class="about-member-copy">
-                <h2>Olivia</h2>
+                <h3>Olivia</h3>
                 <p>
                   Olivia is our synth, backup vocalist, and sister (Antonio and Kristofer’s
                   literal sister). She brings the vibes with specially curated sounds that
@@ -125,7 +225,7 @@
 
             <article class="about-member-row about-member-row--reverse">
               <div class="about-member-copy">
-                <h2>Dan</h2>
+                <h3>Dan</h3>
                 <p>
                   Dan is our lead guitarist, audio engineer, and in-law (Olivia’s husband,
                   Antonio and Kristofer’s brother-in-law). His attention to detail and
@@ -142,7 +242,7 @@
 
             <article class="about-member-row">
               <div class="about-member-copy">
-                <h2>Jackson</h2>
+                <h3>Jackson</h3>
                 <p>
                   Jackson is our drummer. As a chosen member of the family, he is the keystone
                   of the band’s energy with his exceptional skill and innate sense of rhythm.
@@ -162,7 +262,7 @@
 
       <section id="shows" class="site-section page-wrap" aria-label="Shows">
         <div class="page-header">
-          <h1>Shows</h1>
+          <h2>Shows</h2>
           <p>Upcoming dates and a history of where we’ve played.</p>
         </div>
 
@@ -172,7 +272,7 @@
           aria-labelledby="upcoming-shows-heading"
           hidden
         >
-          <h2 id="upcoming-shows-heading" class="shows-section-title">Upcoming</h2>
+          <h3 id="upcoming-shows-heading" class="shows-section-title">Upcoming</h3>
           <ul id="upcoming-shows-list" class="shows-list"></ul>
         </div>
         <p id="upcoming-shows-empty" class="shows-empty shows-list-block">
@@ -180,14 +280,14 @@
         </p>
 
         <div class="shows-section shows-list-block" aria-labelledby="past-shows-heading">
-          <h2 id="past-shows-heading" class="shows-section-title">Previous Shows</h2>
+          <h3 id="past-shows-heading" class="shows-section-title">Previous Shows</h3>
           <div id="past-shows-list" class="past-shows-list"></div>
         </div>
       </section>
 
       <section id="music" class="site-section page-wrap page-section-compact" aria-label="Music">
         <div class="page-header">
-          <h1>Music</h1>
+          <h2>Music</h2>
         </div>
         <div id="music-grid" class="card-grid"></div>
 
@@ -207,10 +307,10 @@
 
       <section id="contact" class="site-section page-wrap page-section-compact" aria-label="Contact">
         <div class="page-header">
-          <h1>Contact</h1>
+          <h2>Contact</h2>
           <p>
             Booking and press:
-            <a class="text-link" href="mailto:mindfullyblind@gmail.com"
+            <a class="text-link" href="mailto:booking@mindfullyblind.com"
               >booking@mindfullyblind.com</a
             >
           </p>
@@ -220,7 +320,7 @@
 
       <section id="newsletter" class="site-section page-wrap page-section-compact" aria-label="Newsletter">
         <div class="page-header">
-          <h1>Newsletter</h1>
+          <h2>Newsletter</h2>
         </div>
         <div class="newsletter-embed">
           <script

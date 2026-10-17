@@ -148,7 +148,7 @@ function renderShows() {
     const yearBlock = document.createElement("section");
     yearBlock.className = "shows-year";
 
-    const heading = document.createElement("h3");
+    const heading = document.createElement("h4");
     heading.className = "shows-year-title";
     heading.textContent = year;
 

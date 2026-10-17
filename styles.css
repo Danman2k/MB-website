@@ -180,7 +180,9 @@ body {
   display: none;
 }
 
-h1 {
+h1,
+.page-header h2,
+.about-hero-content h2 {
   margin: 0;
   font-family: "Syne", sans-serif;
   font-weight: 800;
@@ -333,7 +335,7 @@ h1 {
   max-width: 760px;
 }
 
-.page-header h1 {
+.page-header h2 {
   margin: 0;
   font-size: clamp(1.8rem, 6vw, 3rem);
 }
@@ -390,7 +392,7 @@ h1 {
   margin-inline: auto;
 }
 
-.about-hero-content h1 {
+.about-hero-content h2 {
   margin: 0;
   font-size: clamp(1.8rem, 6vw, 3rem);
 }
@@ -456,7 +458,7 @@ h1 {
   border-top: none;
 }
 
-.about-member-copy h2 {
+.about-member-copy h3 {
   margin: 0;
   font-family: "Syne", sans-serif;
   font-weight: 800;
@@ -874,12 +876,12 @@ h1 {
     display: contents;
   }
 
-  .about-hero-content h1,
+  .about-hero-content h2,
   .about-hero .about-intro {
     padding-inline: 1rem;
   }
 
-  .about-hero-content h1 {
+  .about-hero-content h2 {
     order: 1;
     width: 100%;
     padding: 1.15rem 1rem 0.85rem;
@@ -918,7 +920,7 @@ h1 {
     padding: 1.15rem 1rem 1.35rem;
   }
 
-  .about-member-copy h2 {
+  .about-member-copy h3 {
     font-size: clamp(1.35rem, 6vw, 1.85rem);
   }
 
@@ -943,7 +945,7 @@ h1 {
     padding: 1.5rem 1rem 2.25rem;
   }
 
-  .page-header h1 {
+  .page-header h2 {
     font-size: clamp(1.55rem, 8vw, 2.2rem);
   }
 

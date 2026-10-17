@@ -18,27 +18,15 @@ window.siteData = {
     { label: "TikTok", url: "https://www.tiktok.com/@mindfullyblind", icon: "fa-brands fa-tiktok" },
     { label: "YouTube", url: "https://www.youtube.com/@mindfullyblind", icon: "fa-brands fa-youtube" },
   ],
-  upcomingShows: [
-    {
-      date: "10/7/26",
-      label: "Hoosier Dome, Indianapolis, IN",
-      ticketUrl: "https://wl.eventim.us/event/Greywind/695255?afflky=HoosierDome",
-    },
-     
-  ],
+  upcomingShows: [],
   pastShowsByYear: [
-
-    {
-      date: "9/25/26",
-      label: "Underground Lounge, Chicago, IL",
-      ticketUrl: "",
-    },
     {
       year: 2026,
       shows: [
-       {date: "8/29/26",label: "Bridge's Scoreboard, Griffith, IN",
-    },
-      { date: "10/7/26", label: "Hoosier Dome, Indianapolis, IN" },
+        { date: "10/10/26", label: "Harvest Hang Backyard, Chicago, IL" },
+        { date: "10/7/26", label: "Hoosier Dome, Indianapolis, IN" },
+        { date: "9/25/26", label: "Underground Lounge, Chicago, IL" },
+        { date: "8/29/26", label: "Bridge's Scoreboard, Griffith, IN" },
         { date: "7/12/26", label: "Burlington Bar, Chicago, IL" },
       ],
     },
