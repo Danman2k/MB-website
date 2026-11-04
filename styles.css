@@ -717,11 +717,15 @@ h3 {
 
 /* ---------- The Family (About) ---------- */
 
+/* Inset to the same width and side padding as the other sections */
 .about-hero {
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: calc(100svh - var(--nav-height, 4.5rem));
+  width: calc(min(var(--max-width), 100%) - 2 * var(--side-pad));
+  margin-inline: auto;
+  min-height: calc(100svh - var(--nav-height, 4.5rem) - var(--space-6));
+  border-radius: var(--radius-photo);
   overflow: hidden;
 }
 
@@ -747,9 +751,8 @@ h3 {
 .about-hero-content {
   position: relative;
   z-index: 1;
-  width: min(var(--max-width), 100%);
-  margin-inline: auto;
-  padding: var(--space-6) var(--side-pad);
+  width: 100%;
+  padding: var(--space-6) var(--space-5);
 }
 
 /* No box: a soft dark glow hugs each letter so the text reads over the photo */
@@ -1014,9 +1017,8 @@ h3 {
 /* ---------- Standalone pages (videos.html) ---------- */
 
 .page-wrap {
-  width: min(var(--max-width), 100%);
-  margin-inline: auto;
-  padding: var(--space-6) var(--side-pad);
+  width: 100%;
+  padding: var(--space-6) var(--space-5);
 }
 
 .page-header {
@@ -1189,12 +1191,15 @@ h3 {
     min-height: 0;
     flex-direction: column;
     align-items: stretch;
+    border-radius: 0;
+    overflow: visible;
   }
 
   .about-hero-photo {
     position: static;
     height: auto;
     aspect-ratio: 4 / 5;
+    border-radius: var(--radius-photo);
   }
 
   .about-hero::after {
@@ -1202,7 +1207,7 @@ h3 {
   }
 
   .about-hero-content {
-    padding-block: var(--space-5) 0;
+    padding: var(--space-5) 0 0;
   }
 
   /* On phones the text sits below the photo, so it needs no glow */
