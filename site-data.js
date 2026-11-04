@@ -10,9 +10,16 @@ window.siteData = {
     { label: "YouTube", url: "https://www.youtube.com/@mindfullyblind", icon: "fa-brands fa-youtube" },
     { label: "Bandcamp", url: "https://mindfullyblind.bandcamp.com/", icon: "fa-brands fa-bandcamp" },
   ],
-  // Upcoming show example:
-  // { date: "12/6/26", label: "The Hi-Fi, Indianapolis, IN", ticketUrl: "https://...", tag: "Sold out" }
-  upcomingShows: [],
+  // Upcoming shows. Dates that have passed hide themselves; move them to pastShowsByYear when you can.
+  // Fields: date (M/D/YY), label ("Venue, City, ST"), optional time, ticketUrl, tag ("Sold out", "21+")
+  upcomingShows: [
+    {
+      date: "11/21/26",
+      time: "8:00 PM",
+      label: "Underground Lounge, Chicago, IL",
+      ticketUrl: "https://www.eventim.us/event/Check-PleaseSuperscriptPlain-SuiteMindfully-Blind/700992",
+    },
+  ],
   pastShowsByYear: [
     {
       year: 2026,

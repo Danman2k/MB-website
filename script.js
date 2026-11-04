@@ -92,6 +92,33 @@ function formatShowDate(value) {
     .toUpperCase();
 }
 
+function formatShowWeekday(value) {
+  const date = parseShowDate(value);
+  if (!date) return "";
+  return date.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
+}
+
+// "8:00 PM" -> "20:00"
+function parseShowTime(value) {
+  const match = String(value || "").trim().match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/i);
+  if (!match) return "";
+  let hours = Number(match[1]) % 12;
+  if (match[3].toLowerCase() === "pm") hours += 12;
+  return `${String(hours).padStart(2, "0")}:${match[2] || "00"}`;
+}
+
+// Upcoming shows still ahead of us (including today), soonest first.
+function getUpcomingShows() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return (data.upcomingShows || [])
+    .filter((show) => {
+      const date = parseShowDate(show.date);
+      return !date || date >= today;
+    })
+    .sort((a, b) => (parseShowDate(a.date) || 0) - (parseShowDate(b.date) || 0));
+}
+
 function splitShowLabel(label) {
   const text = label || "";
   const comma = text.indexOf(", ");
@@ -106,6 +133,12 @@ function makeShowRow(show, upcoming) {
   const date = document.createElement("span");
   date.className = "label show-row-date";
   date.textContent = formatShowDate(show.date);
+  if (upcoming) {
+    const when = document.createElement("span");
+    when.className = "show-row-when";
+    when.textContent = [formatShowWeekday(show.date), show.time].filter(Boolean).join(" · ");
+    if (when.textContent) date.appendChild(when);
+  }
 
   const { venue, city } = splitShowLabel(show.label);
   const place = document.createElement("span");
@@ -134,7 +167,7 @@ function makeShowRow(show, upcoming) {
 }
 
 function renderShows() {
-  const upcoming = data.upcomingShows || [];
+  const upcoming = getUpcomingShows();
   const years = data.pastShowsByYear || [];
   const upcomingSection = document.getElementById("upcoming-shows-section");
   const upcomingList = document.getElementById("upcoming-shows-list");
@@ -171,18 +204,19 @@ function renderShows() {
 
 function renderHeroNext() {
   const el = document.getElementById("hero-next");
-  const next = (data.upcomingShows || [])[0];
+  const next = getUpcomingShows()[0];
   if (!el || !next) return;
   const { venue, city } = splitShowLabel(next.label);
   el.textContent = "Next: ";
   const strong = document.createElement("strong");
-  strong.textContent = `${formatShowDate(next.date)} · ${venue}${city ? `, ${city}` : ""}`;
+  const day = [formatShowWeekday(next.date), formatShowDate(next.date)].filter(Boolean).join(", ");
+  strong.textContent = `${day} · ${venue}${city ? `, ${city}` : ""}`;
   el.appendChild(strong);
   el.hidden = false;
 }
 
 function injectEventSchema() {
-  const shows = data.upcomingShows || [];
+  const shows = getUpcomingShows();
   if (!shows.length) return;
   const events = shows
     .map((show) => {
@@ -192,7 +226,12 @@ function injectEventSchema() {
       const event = {
         "@type": "MusicEvent",
         name: `Mindfully Blind at ${venue}`,
-        startDate: date.toISOString().slice(0, 10),
+        startDate: [
+          `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`,
+          parseShowTime(show.time),
+        ]
+          .filter(Boolean)
+          .join("T"),
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         eventStatus: "https://schema.org/EventScheduled",
         location: { "@type": "Place", name: venue, address: city || venue },

@@ -68,6 +68,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Keep the hidden attribute working even on elements styled with display: flex/grid */
+[hidden] {
+  display: none !important;
+}
+
 img {
   max-width: 100%;
 }
@@ -456,6 +461,13 @@ h3 {
 
 .show-row-date {
   color: var(--bone);
+}
+
+.show-row-when {
+  display: block;
+  margin-top: 2px;
+  color: var(--haze);
+  font-size: 0.75rem;
 }
 
 .show-row-venue {
