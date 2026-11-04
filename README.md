@@ -1,4 +1,4 @@
-# Mindfully Blind — www.mindfullyblind.com
+# Mindfully Blind — mindfullyblind.com
 
 The official website for Mindfully Blind: an alternative band (funk, punk, pop, rock) of three
 siblings, an in-law, and a childhood best friend.
@@ -7,9 +7,13 @@ It's a plain static site — HTML, CSS and a little JavaScript, no build step.
 
 ## Deploying
 
-Every push to `main` publishes the site to **www.mindfullyblind.com** through GitHub Pages
+Every push to `main` publishes the site to **mindfullyblind.com** through GitHub Pages
 (`.github/workflows/static.yml`). The `CNAME` file holds the custom domain — don't delete it.
 Preview locally before pushing.
+
+When you change `styles.css`, `script.js` or `site-data.js`, bump the `?v=` date on their links in
+`index.html` and `videos.html`. Browsers cache those files for hours, and an old cached stylesheet
+on a new page makes the site look broken.
 
 ## Preview locally
 
