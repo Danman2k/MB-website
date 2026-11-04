@@ -1,13 +1,4 @@
 window.siteData = {
-  // Mailing list: set formAction to your provider signup URL (Mailchimp, Buttondown, Formspree, etc.)
-  mailingList: {
-    formAction: "",
-    method: "post",
-    emailFieldName: "email",
-    nameFieldName: "",
-    openInNewTab: false,
-    hiddenFields: [],
-  },
   featuredVideo: {
     id: "_UXic_wuCb4",
     title: "Mindfully Blind - Distraction (Official Music Video)",
@@ -17,7 +8,10 @@ window.siteData = {
     { label: "Instagram", url: "https://www.instagram.com/mindfullyblind/", icon: "fa-brands fa-instagram" },
     { label: "TikTok", url: "https://www.tiktok.com/@mindfullyblind", icon: "fa-brands fa-tiktok" },
     { label: "YouTube", url: "https://www.youtube.com/@mindfullyblind", icon: "fa-brands fa-youtube" },
+    { label: "Bandcamp", url: "https://mindfullyblind.bandcamp.com/", icon: "fa-brands fa-bandcamp" },
   ],
+  // Upcoming show example:
+  // { date: "12/6/26", label: "The Hi-Fi, Indianapolis, IN", ticketUrl: "https://...", tag: "Sold out" }
   upcomingShows: [],
   pastShowsByYear: [
     {
@@ -98,18 +92,20 @@ window.siteData = {
    
 
   ],
+  // The first release is featured. Add isNew: true to give it a "New" tag.
+  // Optional: links: [{ label: "Bandcamp", url: "https://..." }] for more platforms.
   music: [
-    {
-      title: "The Wanderer",
-      subtitle: "Spotify",
-      image: "./the-wanderer-album-art.png",
-      url: "https://open.spotify.com/album/28gjbH2mmcgsTyNLAm7ar2?si=f-0u3Xo2RSy8b0Hh_-MmeA",
-    },
     {
       title: "Waste Your Time, Beg For More",
       subtitle: "Spotify",
-      image: "./waste-your-time-album-art.png",
+      image: "./waste-your-time-album-art.webp",
       url: "https://open.spotify.com/album/037NQyJRcHNCdKs6jjImnf?si=dOV0ihyySm-Swcuxv37wmQ",
+    },
+    {
+      title: "The Wanderer",
+      subtitle: "Spotify",
+      image: "./the-wanderer-album-art.webp",
+      url: "https://open.spotify.com/album/28gjbH2mmcgsTyNLAm7ar2?si=f-0u3Xo2RSy8b0Hh_-MmeA",
     },
   ],
 };

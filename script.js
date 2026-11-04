@@ -47,124 +47,288 @@ function renderNavLinks() {
 }
 
 function renderContactLinks() {
-  const container = document.getElementById("contact-links");
-  if (!container) return;
-  data.links.forEach((link) => {
-    container.appendChild(makeButton(link, true));
+  ["contact-links", "footer-links"].forEach((id) => {
+    const container = document.getElementById(id);
+    if (!container) return;
+    const showText = id === "contact-links";
+    data.links.forEach((link) => container.appendChild(makeButton(link, showText)));
   });
 }
 
-function makeCard(item, clickable) {
-  const card = document.createElement(clickable ? "a" : "article");
-  card.className = "card-item";
+function makeLinkButton(label, url, variant, options = {}) {
+  const a = document.createElement("a");
+  a.className = `btn btn-${variant}`;
+  a.href = url;
+  if (options.download) {
+    a.setAttribute("download", "");
+  } else {
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+  }
+  a.textContent = label;
+  return a;
+}
 
-  if (clickable) {
-    card.href = item.url || "#";
-    card.target = "_blank";
-    card.rel = "noopener noreferrer";
+function makeTag(text) {
+  const tag = document.createElement("span");
+  tag.className = "tag";
+  tag.textContent = text;
+  return tag;
+}
+
+// Dates in site-data.js are M/D/YY.
+function parseShowDate(value) {
+  const parts = String(value || "").split("/").map(Number);
+  if (parts.length !== 3 || parts.some(Number.isNaN)) return null;
+  const [month, day, year] = parts;
+  return new Date(year < 100 ? 2000 + year : year, month - 1, day);
+}
+
+function formatShowDate(value) {
+  const date = parseShowDate(value);
+  if (!date) return value || "";
+  return date
+    .toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    .toUpperCase();
+}
+
+function splitShowLabel(label) {
+  const text = label || "";
+  const comma = text.indexOf(", ");
+  if (comma === -1) return { venue: text, city: "" };
+  return { venue: text.slice(0, comma), city: text.slice(comma + 2) };
+}
+
+function makeShowRow(show, upcoming) {
+  const item = document.createElement("li");
+  item.className = upcoming ? "show-row show-row--upcoming" : "show-row";
+
+  const date = document.createElement("span");
+  date.className = "label show-row-date";
+  date.textContent = formatShowDate(show.date);
+
+  const { venue, city } = splitShowLabel(show.label);
+  const place = document.createElement("span");
+  const venueEl = document.createElement("span");
+  venueEl.className = "show-row-venue";
+  venueEl.textContent = venue;
+  place.appendChild(venueEl);
+  if (show.tag) {
+    place.append(" ");
+    place.appendChild(makeTag(show.tag));
+  }
+  if (city) {
+    const cityEl = document.createElement("span");
+    cityEl.className = "show-row-city";
+    cityEl.textContent = city;
+    place.appendChild(cityEl);
   }
 
-  const image = document.createElement("img");
-  image.src = item.image;
-  image.alt = item.title;
+  item.append(date, place);
 
-  const meta = document.createElement("div");
-  meta.className = "card-meta";
-
-  const title = document.createElement("div");
-  title.className = "card-title";
-  title.textContent = item.title;
-
-  const subtitle = document.createElement("div");
-  subtitle.className = "card-subtitle";
-  subtitle.textContent = item.subtitle || "";
-
-  meta.append(title, subtitle);
-  card.append(image, meta);
-  return card;
-}
-
-function formatShowListLine(show) {
-  if (show.date && show.label) return `${show.date} - ${show.label}`;
-  return show.label || show.date || "";
-}
-
-function renderShowListItems(list, shows) {
-  if (!list || !Array.isArray(shows)) return;
-  shows.forEach((show) => {
-    const item = document.createElement("li");
-    item.textContent = formatShowListLine(show);
-    list.appendChild(item);
-  });
-}
-
-function renderUpcomingShowListItems(list, shows) {
-  if (!list || !Array.isArray(shows)) return;
-  shows.forEach((show) => {
-    const item = document.createElement("li");
-    item.className = "shows-list-item";
-
-    const details = document.createElement("span");
-    details.className = "shows-list-details";
-    details.textContent = formatShowListLine(show);
-
-    item.appendChild(details);
-
-    const ticketUrl = show.ticketUrl || show.url;
-    if (ticketUrl) {
-      const ticketLink = document.createElement("a");
-      ticketLink.className = "link-button shows-ticket-button";
-      ticketLink.href = ticketUrl;
-      ticketLink.target = "_blank";
-      ticketLink.rel = "noopener noreferrer";
-      ticketLink.textContent = "Get Tickets";
-      item.appendChild(ticketLink);
-    }
-
-    list.appendChild(item);
-  });
+  const ticketUrl = show.ticketUrl || show.url;
+  if (upcoming && ticketUrl) {
+    item.appendChild(makeLinkButton("Tickets", ticketUrl, "primary"));
+  }
+  return item;
 }
 
 function renderShows() {
   const upcoming = data.upcomingShows || [];
+  const years = data.pastShowsByYear || [];
   const upcomingSection = document.getElementById("upcoming-shows-section");
   const upcomingList = document.getElementById("upcoming-shows-list");
   const empty = document.getElementById("upcoming-shows-empty");
 
-  if (upcoming.length > 0) {
-    if (upcomingSection) upcomingSection.hidden = false;
-    if (empty) empty.hidden = true;
-    renderUpcomingShowListItems(upcomingList, upcoming);
-  } else {
-    if (upcomingSection) upcomingSection.hidden = true;
-    if (empty) empty.hidden = false;
-  }
+  if (upcomingSection) upcomingSection.hidden = upcoming.length === 0;
+  if (empty) empty.hidden = upcoming.length > 0;
+  upcoming.forEach((show) => upcomingList?.appendChild(makeShowRow(show, true)));
 
   const pastContainer = document.getElementById("past-shows-list");
-  const years = data.pastShowsByYear || [];
   if (!pastContainer) return;
 
-  years.forEach(({ year, shows }) => {
-    const yearBlock = document.createElement("section");
+  years.forEach(({ year, shows }, index) => {
+    const yearBlock = document.createElement("details");
     yearBlock.className = "shows-year";
+    if (index === 0) yearBlock.open = true;
 
+    const summary = document.createElement("summary");
     const heading = document.createElement("h4");
-    heading.className = "shows-year-title";
     heading.textContent = year;
+    const total = document.createElement("span");
+    total.className = "label";
+    total.textContent = `${shows.length} ${shows.length === 1 ? "show" : "shows"}`;
+    summary.append(heading, total);
 
     const list = document.createElement("ul");
-    list.className = "shows-list";
-    renderShowListItems(list, shows);
+    list.className = "show-rows";
+    shows.forEach((show) => list.appendChild(makeShowRow(show, false)));
 
-    yearBlock.append(heading, list);
+    yearBlock.append(summary, list);
     pastContainer.appendChild(yearBlock);
   });
+}
+
+function renderHeroNext() {
+  const el = document.getElementById("hero-next");
+  const next = (data.upcomingShows || [])[0];
+  if (!el || !next) return;
+  const { venue, city } = splitShowLabel(next.label);
+  el.textContent = "Next: ";
+  const strong = document.createElement("strong");
+  strong.textContent = `${formatShowDate(next.date)} · ${venue}${city ? `, ${city}` : ""}`;
+  el.appendChild(strong);
+  el.hidden = false;
+}
+
+function injectEventSchema() {
+  const shows = data.upcomingShows || [];
+  if (!shows.length) return;
+  const events = shows
+    .map((show) => {
+      const date = parseShowDate(show.date);
+      if (!date) return null;
+      const { venue, city } = splitShowLabel(show.label);
+      const event = {
+        "@type": "MusicEvent",
+        name: `Mindfully Blind at ${venue}`,
+        startDate: date.toISOString().slice(0, 10),
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        eventStatus: "https://schema.org/EventScheduled",
+        location: { "@type": "Place", name: venue, address: city || venue },
+        performer: { "@id": "https://mindfullyblind.com/#band" },
+      };
+      const ticketUrl = show.ticketUrl || show.url;
+      if (ticketUrl) event.offers = { "@type": "Offer", url: ticketUrl };
+      return event;
+    })
+    .filter(Boolean);
+  if (!events.length) return;
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": events });
+  document.head.appendChild(script);
+}
+
+function makeRelease(item, featured) {
+  const release = document.createElement("article");
+  release.className = featured ? "release release--featured reveal" : "release reveal";
+
+  const art = document.createElement("a");
+  art.className = "release-art";
+  art.href = item.url || "#";
+  art.target = "_blank";
+  art.rel = "noopener noreferrer";
+  art.setAttribute("aria-label", `Listen to ${item.title} on ${item.subtitle || "Spotify"}`);
+
+  const image = document.createElement("img");
+  image.src = item.image;
+  image.alt = `${item.title} album art`;
+  image.width = 1024;
+  image.height = 1024;
+  image.loading = "lazy";
+  art.appendChild(image);
+  if (item.isNew) art.appendChild(makeTag("New"));
+
+  const title = document.createElement("h3");
+  title.className = "release-title";
+  title.textContent = item.title;
+
+  const links = document.createElement("div");
+  links.className = "release-links";
+  const platforms = [
+    { label: item.subtitle || "Spotify", url: item.url },
+    ...(Array.isArray(item.links) ? item.links : []),
+  ].filter((platform) => platform.url);
+  platforms.forEach((platform, index) => {
+    links.appendChild(
+      makeLinkButton(platform.label, platform.url, featured && index === 0 ? "primary" : "secondary")
+    );
+  });
+
+  release.append(art, title, links);
+  return release;
 }
 
 function renderMusicGrid() {
   const container = document.getElementById("music-grid");
   if (!container || !Array.isArray(data.music)) return;
-  data.music.forEach((item) => container.appendChild(makeCard(item, true)));
+  data.music.forEach((item, index) => container.appendChild(makeRelease(item, index === 0)));
+}
+
+function renderWatchVideo() {
+  const container = document.getElementById("watch-video");
+  const video = data.featuredVideo;
+  if (!container || !video?.id) return;
+
+  const watchUrl = `https://www.youtube.com/watch?v=${video.id}`;
+  const canEmbed =
+    window.location.protocol === "http:" || window.location.protocol === "https:";
+
+  // Lite embed: show the thumbnail and only load YouTube when someone presses play.
+  const button = document.createElement(canEmbed ? "button" : "a");
+  button.className = "video-lite-button";
+  if (canEmbed) {
+    button.type = "button";
+  } else {
+    button.href = watchUrl;
+    button.target = "_blank";
+    button.rel = "noopener noreferrer";
+  }
+  button.setAttribute("aria-label", `Play ${video.title || "video"}`);
+  button.innerHTML =
+    '<span class="video-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>' +
+    '<span class="label video-label">Play video</span>';
+
+  const thumb = document.createElement("img");
+  thumb.src = `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
+  thumb.alt = "";
+  thumb.loading = "lazy";
+  button.prepend(thumb);
+
+  if (canEmbed) {
+    button.addEventListener("click", () => {
+      const params = new URLSearchParams({ rel: "0", autoplay: "1", origin: window.location.origin });
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${video.id}?${params.toString()}`;
+      iframe.title = video.title || "Mindfully Blind music video";
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      iframe.allowFullscreen = true;
+      container.replaceChildren(iframe);
+    });
+  }
+
+  container.appendChild(button);
+}
+
+function renderFooter() {
+  const year = document.getElementById("footer-year");
+  if (year) year.textContent = new Date().getFullYear();
+}
+
+function initReveal() {
+  const items = Array.from(document.querySelectorAll(".reveal"));
+  if (!items.length) return;
+  if (!("IntersectionObserver" in window)) {
+    items.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "0px 0px -10% 0px" }
+  );
+  items.forEach((item, index) => {
+    item.style.setProperty("--reveal-delay", `${(index % 3) * 40}ms`);
+    observer.observe(item);
+  });
 }
 
 function renderFeaturedVideo() {
@@ -203,71 +367,6 @@ function renderFeaturedVideo() {
   });
 
   iframe.src = `https://www.youtube.com/embed/${video.id}?${params.toString()}`;
-}
-
-function initMailingListForm() {
-  const form = document.getElementById("mailing-list-form");
-  if (!form) return;
-
-  const config = data.mailingList || {};
-  const status = document.getElementById("mailing-form-status");
-  const emailInput = document.getElementById("mailing-email");
-  const nameField = document.getElementById("mailing-name-field");
-  const nameInput = document.getElementById("mailing-name");
-  const hiddenContainer = document.getElementById("mailing-hidden-fields");
-
-  const showStatus = (message, type) => {
-    if (!status) return;
-    status.textContent = message;
-    status.hidden = !message;
-    status.classList.toggle("is-error", type === "error");
-    status.classList.toggle("is-success", type === "success");
-  };
-
-  if (new URLSearchParams(window.location.search).has("subscribed")) {
-    showStatus("You're on the list. Thanks for joining.", "success");
-  }
-
-  if (emailInput && config.emailFieldName) {
-    emailInput.name = config.emailFieldName;
-  }
-
-  if (nameField && nameInput && config.nameFieldName) {
-    nameField.hidden = false;
-    nameInput.name = config.nameFieldName;
-  }
-
-  if (hiddenContainer && Array.isArray(config.hiddenFields)) {
-    config.hiddenFields.forEach(({ name, value }) => {
-      if (!name) return;
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value ?? "";
-      hiddenContainer.appendChild(input);
-    });
-  }
-
-  if (config.formAction) {
-    form.action = config.formAction;
-    form.method = (config.method || "post").toLowerCase();
-    if (config.openInNewTab) {
-      form.target = "_blank";
-      form.rel = "noopener noreferrer";
-    }
-  }
-
-  form.addEventListener("submit", (event) => {
-    if (!config.formAction) {
-      event.preventDefault();
-      showStatus(
-        "Mailing list signup is not configured yet. Add your provider URL to mailingList.formAction in site-data.js.",
-        "error"
-      );
-      return;
-    }
-    showStatus("", null);
-  });
 }
 
 function initMobileNav() {
@@ -404,7 +503,7 @@ function initSectionNav() {
     setActiveSection(sectionId);
   };
 
-  navLinks.forEach((link) => {
+  document.querySelectorAll("a[data-section]").forEach((link) => {
     link.addEventListener("click", (event) => {
       const sectionId = link.dataset.section || link.getAttribute("href")?.slice(1);
       if (!sectionId || !sectionById.has(sectionId)) return;
@@ -431,9 +530,13 @@ renderLinks();
 renderNavLinks();
 renderContactLinks();
 renderShows();
+renderHeroNext();
+injectEventSchema();
 renderMusicGrid();
+renderWatchVideo();
 renderFeaturedVideo();
-initMailingListForm();
+renderFooter();
+initReveal();
 initMobileNav();
 initScrollNav();
 initSectionNav();
