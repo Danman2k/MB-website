@@ -196,7 +196,7 @@ function injectEventSchema() {
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         eventStatus: "https://schema.org/EventScheduled",
         location: { "@type": "Place", name: venue, address: city || venue },
-        performer: { "@id": "https://mindfullyblind.com/#band" },
+        performer: { "@id": "https://www.mindfullyblind.com/#band" },
       };
       const ticketUrl = show.ticketUrl || show.url;
       if (ticketUrl) event.offers = { "@type": "Offer", url: ticketUrl };

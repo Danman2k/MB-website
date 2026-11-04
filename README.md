@@ -1,4 +1,4 @@
-# Mindfully Blind — mindfullyblind.com
+# Mindfully Blind — www.mindfullyblind.com
 
 The official website for Mindfully Blind: an alternative band (funk, punk, pop, rock) of three
 siblings, an in-law, and a childhood best friend.
